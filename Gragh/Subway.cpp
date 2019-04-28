@@ -39,10 +39,10 @@ int main(){
                 C[i][L[j]] = 1;
         for(int j = 1;j<=n;j++){
             if(i != j){
-                if(G[i][j] == INF)continue;
+                if(G[i][j] >= INF)continue;
                 int flag = 0;
                 for(int a = 1;a<=n;a++){
-                    if(a != j && a!= i && G[i][a]/k == G[i][j]/k && G[i][a] > G[i][j]){
+                    if(a != j && a!= i && G[i][a] < INF && G[i][a]/k == G[i][j]/k && G[i][a] > G[i][j]){
                         flag = 1;
                         break;
                     }
