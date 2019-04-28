@@ -47,8 +47,9 @@ void SolveTime(){
         vis[i] = 0;
         d[i] = Gt[start][i];
         pre[i] = start;
-        cnt[i] = 1;
+        cnt[i] = Gd[start][i];
     }
+    cnt[start] = 0;
     d[start] = 0;
     vis[start] = 1;
     pre[start] = -1;
@@ -64,11 +65,11 @@ void SolveTime(){
         for(int i=0;i<N;i++){
             if(!vis[i] && d[i]> d[minNode]+Gt[minNode][i]){
                 d[i] = d[minNode]+Gt[minNode][i];
-                cnt[i] = cnt[minNode] + 1;
+                cnt[i] = cnt[minNode] + Gd[minNode][i];
                 pre[i] = minNode;
             }else if(!vis[i] && d[i] == d[minNode]+Gt[minNode][i]){
-                if(cnt[i] > cnt[minNode]+1){
-                    cnt[i] = cnt[minNode]+1;
+                if(cnt[i] > cnt[minNode]+Gd[minNode][i]){
+                    cnt[i] = cnt[minNode]+cnt[minNode]+Gd[minNode][i];
                     pre[i] = minNode;
                 }
             }
