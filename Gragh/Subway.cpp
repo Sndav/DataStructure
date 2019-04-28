@@ -13,37 +13,39 @@ int L[3010];
 int main(){
     freopen("/Users/hackboy/Code/C/in","r",stdin);
     cin>>n>>m>>k;
-    memset(G,INF,sizeof(G));
-    for(int i = 1;i<=n;i++)G[i][i]=0;
+    for(int i = 1;i<=n;i++)
+        for(int j = 1;j<=n;j++)
+            G[i][j] = (i == j?0:-1);
     for(int i=0;i<m;i++){
         int s,l,e;
         scanf("%d",&s);
         L[2*i] = s;
         do {
             scanf("%d%d",&l,&e);
-            if(G[s][e] == INF || G[s][e] > l){
+            if(G[s][e] == -1 || G[s][e] > l){
                 G[s][e] = G[e][s] = l;
             }
             s = e;
 		} while (getchar() != '\n');
         L[2*i+1] = s;
     }
-    for(int i = 1;i<=n;i++)
-        for(int j = 1;j<=n;j++)
-            for(int x = 1;x<=n;x++)
-                G[i][x] = min(G[i][j]+G[j][x],G[i][x]);
+    for(int a = 1; a <= n; ++a)
+        for(int i = 1; i <=n; ++i)
+            for(int j = 1; j <= n; ++j)
+                if(G[i][a] != -1 && G[a][j] != -1)
+                    if(G[i][j] == -1 || G[i][a] + G[a][j] < G[i][j])
+                        G[i][j] = G[i][a] + G[a][j];
 
     for(int i = 1;i<=n;i++){
         for(int j=0;j<2*m;j++)
-            if(G[i][L[j]] < INF)
+            if(G[i][L[j]] != -1)
                 C[i][L[j]] = 1;
         for(int j = 1;j<=n;j++){
             if(i != j){
-                if(G[i][j] >= INF)continue;
+                if(G[i][j] == -1)continue;
                 int flag = 0;
                 for(int a = 1;a<=n;a++){
-                    if(a != j && a!= i && G[i][a] < INF && G[i][a]/k == G[i][j]/k && G[i][a] > G[i][j]){
-                        flag = 1;
+                    if(a != j && a!= i && G[i][a] != -1 && G[i][a]/k == G[i][j]/k && G[i][a] > G[i][j]){
                         break;
                     }
                 }
