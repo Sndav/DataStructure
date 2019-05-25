@@ -46,6 +46,7 @@ int main(){
                 int flag = 0;
                 for(int a = 1;a<=n;a++){
                     if(a != j && a!= i && G[i][a] != -1 && G[i][a]/k == G[i][j]/k && G[i][a] > G[i][j]){
+                        flag = 1;
                         break;
                     }
                 }
