@@ -23,9 +23,9 @@ int main(){
         cin>>n1>>n2>>w;
         D[n1][n2] = D[n2][n1] = G[n1][n2] = G[n2][n1] = w;
     }
-    for(int i = 1;i<=N;i++)
-        for(int j = 1;j<=N;j++)
-            for(int k = 1;k<=N;k++){
+    for(int k = 1;k<=N;k++)
+        for(int i = 1;i<=N;i++)
+            for(int j = 1;j<=N;j++){
                 D[i][j] = min(D[i][k] + D[k][j],D[i][j]);
             }
     for(int i = 1;i<=N;i++)
